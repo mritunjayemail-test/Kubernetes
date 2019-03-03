@@ -1,0 +1,21 @@
+---
+# Service.
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: j-hello
+  labels:
+    app: helloworld
+spec:
+  selector:
+      app: helloworld
+  type: NodePort
+  ports:
+    - port: 80
+      name: http
+      targetPort: 3000
+      nodePort: 30001
+      protocol: TCP
+ 
