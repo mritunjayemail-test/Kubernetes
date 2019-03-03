@@ -11,9 +11,7 @@ kubectl scale rc guestbook --replicas=5
 
 # Check your created service properties: 
 kubectl describe service guestbook
-kubectl describe service guestbook
-
-
+kubectl describe service redis-master
 
 # Clean Up all resources:
 kubectl delete rc --all
