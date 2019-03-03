@@ -1,5 +1,5 @@
 
-
+# Step to execute
 kubectl create -f redis-master-controller.yml
 kubectl create -f redis-master-service.yml
 kubectl create -f redis-slave-controller.yml
@@ -13,3 +13,8 @@ kubectl scale rc guestbook --replicas=5
 kubectl delete rc --all
 kubectl delete svc --all
 kubectl delete pods --all
+
+# verify
+kubectl get rc
+kubectl get pods
+kubectl get svc
