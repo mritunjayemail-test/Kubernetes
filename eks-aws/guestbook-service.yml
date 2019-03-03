@@ -9,7 +9,7 @@ metadata:
     app: guestbook
 spec:
   ports:
-  - port: 3000
+  - port: 3000 # browser uses this port.
     targetPort: http-server
   selector:
     app: guestbook
