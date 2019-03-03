@@ -1,6 +1,7 @@
 ---
 # Step 1.
 
+
 kind: ReplicationController
 apiVersion: v1
 metadata:
