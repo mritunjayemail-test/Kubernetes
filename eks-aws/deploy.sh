@@ -7,6 +7,7 @@ kubectl create -f redis-slave-service.yml
 kubectl create -f guestbook-controller.yml
 kubectl create -f guestbook-service.yml
 
+# replicationcontroller scale 
 kubectl scale rc guestbook --replicas=5
 
 # Check your created service properties: 
