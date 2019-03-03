@@ -9,6 +9,12 @@ kubectl create -f guestbook-service.yml
 
 kubectl scale rc guestbook --replicas=5
 
+# Check your created service properties: 
+kubectl describe service guestbook
+kubectl describe service guestbook
+
+
+
 # Clean Up all resources:
 kubectl delete rc --all
 kubectl delete svc --all
