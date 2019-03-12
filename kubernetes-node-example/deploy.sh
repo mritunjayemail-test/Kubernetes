@@ -7,6 +7,7 @@ docker  build -t kubernetes-node:v1 .
 kubectl get pods
 
 kubectl apply -f deployment.yaml
+kubectl describe deploy kubernetes-node-deployment
 
 #kubectl expose kubernetes-node-deployment --type=NodePort 
 
