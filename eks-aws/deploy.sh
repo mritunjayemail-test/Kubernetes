@@ -1,3 +1,4 @@
+aws eks --region eu-west-1 update-kubeconfig --name My-EKS-cluster-name
 
 # Step to execute
 kubectl create -f redis-master-controller.yml

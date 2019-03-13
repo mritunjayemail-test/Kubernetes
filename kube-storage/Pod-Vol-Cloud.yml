@@ -18,5 +18,6 @@ spec:
 
   volumes:
     - name: my-vol
-      hostPath:
-       path: /var/lib/my-data
+      awsElasticBlockStore:
+       volumeID: vol-044d97ea2689fbf2b
+       fsType: ext4
