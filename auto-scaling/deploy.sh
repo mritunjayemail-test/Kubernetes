@@ -12,4 +12,6 @@ while true; do wget -q -O- http://acg-lb.acg-ns.svc.cluster.local; done
 
 # CIDR range for node IP
 kubectl get nodes -o jsonpath='{.items[*].spec.externalID}'
+apt-get install iputils-ping curl dnsutils iproute2 -y
+
 
