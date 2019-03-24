@@ -1,12 +1,10 @@
-const express = require('express')
-let app = express()
+const express = require('express');
+let app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello Docker World with Kubernetes, App Version:v2 \n')
-})
+  res.send('<h1>Hello Docker World with Kubernetes: version: v1</h1>');
+});
 
-const PORT = process.env.PORT || 9000
-app.listen(
-  PORT,
-  () => console.log('Listening on PORT :', PORT)
-)
+const PORT = process.env.PORT || 9000;
+
+app.listen(PORT, () => console.log('Listening on PORT :', PORT));
