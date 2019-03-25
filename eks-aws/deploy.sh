@@ -5,14 +5,14 @@ kubectl apply -f redis-master-controller.yml
 kubectl apply -f redis-master-service.yml
 kubectl apply -f redis-slave-controller.yml
 kubectl apply -f redis-slave-service.yml
-kubectl apply -f guestbook-controller.yml
-kubectl apply -f guestbook-service.yml
+kubectl apply -f my-app-controller.yml
+kubectl apply -f my-app-service.yml
 
 # replicationcontroller scale 
-kubectl scale rc guestbook --replicas=5
+kubectl scale rc my-database-app --replicas=5
 
 # Check your created service properties: 
-kubectl describe service guestbook
+kubectl describe service my-database-app
 kubectl describe service redis-master
 
 # Clean Up all resources:

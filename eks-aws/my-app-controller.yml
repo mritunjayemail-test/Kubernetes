@@ -1,24 +1,23 @@
 ---
 # Step 5.
 
-
 kind: ReplicationController
 apiVersion: v1
 metadata:
-  name: guestbook
+  name: my-database-app
   labels:
-    app: guestbook
+    app: my-database-app
 spec:
   replicas: 3
   selector:
-    app: guestbook
+    app: my-database-app
   template:
     metadata:
       labels:
-        app: guestbook
+        app: my-database-app
     spec:
       containers:
-      - name: guestbook
+      - name: my-database-app
         image: ashupost/my-database-app:v1
         ports:
         - name: http-server

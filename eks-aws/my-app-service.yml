@@ -4,15 +4,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: guestbook
+  name: my-database-app
   labels:
-    app: guestbook
+    app: my-database-app
 spec:
   ports:
   - port: 3000 # browser uses this port.
     targetPort: http-server
     nodePort: 32001
   selector:
-    app: guestbook
+    app: my-database-app
   type: NodePort
 
