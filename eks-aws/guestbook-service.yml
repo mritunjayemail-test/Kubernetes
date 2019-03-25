@@ -11,7 +11,8 @@ spec:
   ports:
   - port: 3000 # browser uses this port.
     targetPort: http-server
+    nodePort: 32001
   selector:
     app: guestbook
-  type: LoadBalancer
+  type: NodePort
 

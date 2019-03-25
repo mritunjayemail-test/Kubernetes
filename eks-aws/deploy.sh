@@ -1,12 +1,12 @@
 aws eks --region eu-west-1 update-kubeconfig --name My-EKS-cluster-name
 
 # Step to execute
-kubectl create -f redis-master-controller.yml
-kubectl create -f redis-master-service.yml
-kubectl create -f redis-slave-controller.yml
-kubectl create -f redis-slave-service.yml
-kubectl create -f guestbook-controller.yml
-kubectl create -f guestbook-service.yml
+kubectl apply -f redis-master-controller.yml
+kubectl apply -f redis-master-service.yml
+kubectl apply -f redis-slave-controller.yml
+kubectl apply -f redis-slave-service.yml
+kubectl apply -f guestbook-controller.yml
+kubectl apply -f guestbook-service.yml
 
 # replicationcontroller scale 
 kubectl scale rc guestbook --replicas=5
