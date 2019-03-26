@@ -12,3 +12,7 @@ https://kubernetes.github.io/ingress-nginx/deploy/#minikube
 # To check if the ingress controller pods have started, run the following command:
 kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx --watch
 
+
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=Password123
+
+
