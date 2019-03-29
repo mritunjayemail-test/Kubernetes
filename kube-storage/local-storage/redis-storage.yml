@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: my-app
+  template:
+    metadata:
+      labels:
+        name: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: ashupost/redis:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: redis 
+              containerPort: 9000
+          volumeMounts:
+            - name: vol-mount-name
+              mountPath: /data
+      volumes:
+        - name: vol-mount-name
+          emptyDir: {}
+
+        
