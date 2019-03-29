@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: configmap-storage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: configmap-storage
+  template:
+    metadata:
+      labels:
+        name: configmap-storage
+    spec:
+      containers:
+        - name: configmap-storage
+          image: ashupost/redis:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: redis 
+              containerPort: 9000
+          volumeMounts:
+            - name: configmap-volume
+              mountPath: /my-configmap-data # cat /my-configmap-data/log_level -> INFO
+      volumes:
+        - name: configmap-volume
+          configMap:
+            name: log-config
+            items:
+              - key: log_level
+                path: log_level
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-config
+data:
+  log_level: INFO
