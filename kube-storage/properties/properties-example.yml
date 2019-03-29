@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: secret-storage
+    name: properties-example
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: secret-storage
+      name: properties-example
   template:
     metadata:
       labels:
-        name: secret-storage
+        name: properties-example
     spec:
       containers:
-        - name: secret-storage
+        - name: properties-example
           image: ashupost/redis:v1
           imagePullPolicy: IfNotPresent
           ports:
