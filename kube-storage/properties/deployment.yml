@@ -28,6 +28,15 @@ spec:
                 configMapKeyRef:
                   name: example-configmap
                   key: MY_HELLO
+          volumeMounts:
+            - name: config-volume
+              mountPath: /mydata
+      volumes:
+        - name: config-volume
+          configMap:
+            # provide the name of config map containing the file which you want to add in container.
+            name: example-configmap
+
 ---
 apiVersion: v1
 kind: ConfigMap
