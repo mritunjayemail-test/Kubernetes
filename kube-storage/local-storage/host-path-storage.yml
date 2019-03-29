@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: host-path-storage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: host-path-storage
+  template:
+    metadata:
+      labels:
+        name: host-path-storage
+    spec:
+      containers:
+        - name: host-path-storage
+          image: ashupost/redis:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: redis 
+              containerPort: 9000
+          volumeMounts:
+            - name: vol-mount-name
+              mountPath: /test-data
+      volumes:
+        - name: vol-mount-name
+          hostPath:
+            path: /data
+            type: Directory
+
+        
