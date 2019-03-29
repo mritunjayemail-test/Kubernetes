@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: secret-storage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: secret-storage
+  template:
+    metadata:
+      labels:
+        name: secret-storage
+    spec:
+      containers:
+        - name: secret-storage
+          image: ashupost/redis:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: my-port-name
+              containerPort: 9000
+          envFrom:   # echo $MY_WORLD -> world
+            - configMapRef:
+                name: example-configmap
+          env:
+            - name: SPECIAL_LEVEL_KEY # echo $SPECIAL_LEVEL_KEY -> hello
+              valueFrom:
+                configMapKeyRef:
+                  name: example-configmap
+                  key: MY_HELLO
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap
+data:
+  MY_HELLO: hello
+  MY_WORLD: world
+  # example of a complex property defined using --from-file
+  myproperties.properties: |-
+    username=mritunjay
+    password=kumar
+
+# kubectl create configmap --dry-run somename --from-file=./myproperties.properties --output yaml
