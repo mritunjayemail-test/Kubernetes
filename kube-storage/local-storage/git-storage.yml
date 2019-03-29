@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: git-storage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: git-storage
+  template:
+    metadata:
+      labels:
+        name: git-storage
+    spec:
+      containers:
+        - name: git-storage
+          image: ashupost/redis:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: redis 
+              containerPort: 9000
+          volumeMounts:
+            - name: git-volume
+              mountPath: /my-git-data
+      volumes:
+        - name: git-volume
+          gitRepo:
+            repository: "https://github.com/mritunjayemail/kube-storage.git"
+            revision: "master"
+
+        
