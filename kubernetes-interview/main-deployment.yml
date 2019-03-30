@@ -1,0 +1,129 @@
+---
+#. Step 1.
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  replicas: 1
+  selector:
+    app: redis
+    role: master
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+    spec:
+      containers:
+      - name: redis-master
+        image: redis:2.8.23
+        ports:
+        - name: redis-server
+          containerPort: 6379
+
+---
+# Step 2.
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: master
+
+---
+# Step 3.
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: redis-slave
+  labels:
+    app: redis
+    role: slave
+spec:
+  replicas: 2
+  selector:
+    app: redis
+    role: slave
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: slave
+    spec:
+      containers:
+      - name: redis-slave
+        image: kubernetes/redis-slave:v2
+        ports:
+        - name: redis-server
+          containerPort: 6379
+
+---
+# Step 4.
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-slave
+  labels:
+    app: redis
+    role: slave
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+    role: slave
+
+---
+# Step 5.
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: my-database-app
+  labels:
+    app: my-database-app
+spec:
+  replicas: 3
+  selector:
+    app: my-database-app
+  template:
+    metadata:
+      labels:
+        app: my-database-app
+    spec:
+      containers:
+      - name: my-database-app
+        image: ashupost/my-database-app:v1
+        ports:
+        - name: http-server
+          containerPort: 3000
+
+---
+# Step 6
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-database-app
+  labels:
+    app: my-database-app
+spec:
+  ports:
+  - port: 3000 # browser uses this port.
+    targetPort: http-server
+    
+  selector:
+    app: my-database-app
+  type: LoadBalancer # LoadBalancer
+
